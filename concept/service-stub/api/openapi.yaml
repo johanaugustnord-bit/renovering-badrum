@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: Björn Supplier Marketplace Stub
+  version: 0.1.0
+  description: Minimal API contract for matching a structured job request with qualified trade providers.
+servers:
+  - url: https://example.invalid/api
+paths:
+  /providers:
+    get:
+      summary: Search providers
+      parameters:
+        - in: query
+          name: trade
+          schema: { type: string }
+        - in: query
+          name: postalCode
+          schema: { type: string }
+        - in: query
+          name: availableFrom
+          schema: { type: string, format: date }
+        - in: query
+          name: verifiedOnly
+          schema: { type: boolean, default: true }
+      responses:
+        '200':
+          description: Matching providers
+  /providers/{providerId}:
+    get:
+      summary: Get provider profile with capabilities and verification evidence
+      parameters:
+        - in: path
+          name: providerId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Provider profile }
+        '404': { description: Provider not found }
+  /job-requests:
+    post:
+      summary: Create a structured customer job request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequest'
+      responses:
+        '201': { description: Job request created }
+  /job-requests/{jobRequestId}/shortlist:
+    post:
+      summary: Generate provider shortlist for a job request
+      parameters:
+        - in: path
+          name: jobRequestId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Ranked shortlist }
+  /rfqs:
+    post:
+      summary: Create an RFQ for one or more shortlisted providers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RFQ'
+      responses:
+        '201': { description: RFQ created }
+  /quotes:
+    post:
+      summary: Submit a normalized quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quote'
+      responses:
+        '201': { description: Quote accepted }
+  /quotes/{quoteId}/select:
+    post:
+      summary: Select a quote and prepare project handoff
+      parameters:
+        - in: path
+          name: quoteId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Project handoff package
+  /references:
+    post:
+      summary: Register a reference for a completed verified assignment
+      responses:
+        '201': { description: Reference registered }
+  /invoice-evidence:
+    post:
+      summary: Register evidence that an assignment was genuinely invoiced
+      responses:
+        '201': { description: Evidence registered }
+components:
+  schemas:
+    JobRequest:
+      type: object
+      required: [trade, location, description]
+      properties:
+        trade:
+          type: string
+          example: vvs
+        location:
+          type: object
+          properties:
+            postalCode: { type: string, example: '42600' }
+            municipality: { type: string, example: Göteborg }
+        description:
+          type: string
+          example: Renovering av befintligt badrum
+        desiredStart:
+          type: string
+          format: date
+        budgetRangeSek:
+          type: object
+          properties:
+            min: { type: integer }
+            max: { type: integer }
+        requiredVerifications:
+          type: array
+          items: { type: string }
+    RFQ:
+      type: object
+      required: [jobRequestId, providerIds]
+      properties:
+        jobRequestId: { type: string }
+        providerIds:
+          type: array
+          items: { type: string }
+        responseDeadline:
+          type: string
+          format: date-time
+    Quote:
+      type: object
+      required: [rfqId, providerId, totalSek]
+      properties:
+        rfqId: { type: string }
+        providerId: { type: string }
+        totalSek: { type: integer }
+        includedWork:
+          type: array
+          items: { type: string }
+        exclusions:
+          type: array
+          items: { type: string }
+        earliestStart:
+          type: string
+          format: date
+        estimatedDurationDays:
+          type: integer
+        validUntil:
+          type: string
+          format: date
