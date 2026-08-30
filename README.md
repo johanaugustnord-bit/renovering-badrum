@@ -34,34 +34,35 @@ Tanken är att projektets aktuella sanning alltid ska gå att hitta här, i stä
 - `projekt/tidplan.md` – faser, beroenden och milstolpar
 - `projekt/beslut.md` – beslutslogg
 - `projekt/kvalitet.md` – kvalitetskontroller och dokumentation
+- `projekt/roller-och-ansvar.md` – byggherre, huvudentreprenör, yrkesroller och RACI
+- `AI-PROJEKTADMIN.md` – hur ChatGPT Work och Codex CLI används i projektadministrationen
+- `AGENTS.md` – arbetsregler för Codex och principen agent-per-roll
 - `inkop/materiallista.md` – produkter, material och beställningsstatus
 - `leverans/slutkontroll.md` – slutbesiktning och överlämning
+
+## Agent-per-roll
+
+Projektet bygger på att varje mänsklig roll kan ha sin egen AI-assistent. Byggherre, huvudentreprenör, rörmokare, elektriker, snickare, plattsättare och andra deltagare förväntas kunna använda sin egen ChatGPT eller Codex för att administrera sitt arbete mot samma repo.
+
+AI-assistenten kan läsa relevanta Issues, uppdatera status, dokumentera avvikelser, skapa följdaktiviteter och lämna en tydlig överlämning till nästa roll. Yrkesansvaret ligger fortfarande hos människan; AI:n fungerar som projektadministrativt stöd.
 
 ## Exempel på arbetsflöde
 
 1. Ett behov eller problem skapas som ett Issue.
-2. Ansvarig och nästa steg tydliggörs.
-3. Om frågan innebär en större förändring dokumenteras förslaget separat och kan hanteras via Pull Request.
-4. När beslut fattas uppdateras relevant projektdokumentation.
-5. Commit-historiken visar exakt vad som ändrats och när.
-6. Ett GitHub Project kan användas för status som `Planerat`, `Beslut krävs`, `Beställt`, `Pågår`, `Kontroll` och `Klart`.
+2. Ansvarig roll och nästa steg tydliggörs.
+3. Rollens egen ChatGPT eller Codex läser relevant projektkontext och hjälper till att hålla Issue och dokumentation aktuella.
+4. Om frågan innebär en större förändring dokumenteras förslaget separat och kan hanteras via Pull Request.
+5. När beslut fattas uppdateras relevant projektdokumentation.
+6. Commit-historiken visar exakt vad som ändrats och när.
+7. Ett GitHub Project kan användas för status som `Planerat`, `Beslut krävs`, `Beställt`, `Pågår`, `Kontroll` och `Klart`.
 
 ## AI som projektadministratör
 
-En AI-agent som ChatGPT eller Codex kan arbeta ovanpå repot och exempelvis:
-
-- sammanfatta aktuell projektstatus
-- hitta blockerande aktiviteter
-- jämföra offerter eller produktalternativ
-- skapa inköpslistor
-- kontrollera om dokumentation saknas inför nästa byggmoment
-- föreslå nya Issues
-- skriva veckorapporter
-- identifiera beslut som ännu inte dokumenterats
+Se `AI-PROJEKTADMIN.md` för praktiska exempel med ChatGPT Work och Codex CLI.
 
 Exempelprompt:
 
-> Gå igenom badrumsprojektet. Sammanfatta vad som är klart, vilka beslut som väntar, vilka aktiviteter som blockerar tidsplanen och vilka tre saker som bör göras härnäst.
+> Gå igenom badrumsprojektet utifrån min roll. Sammanfatta vad jag ansvarar för, vad som blockerar mitt arbete, vilka Issues jag bör uppdatera och vad nästa yrkesroll behöver veta innan överlämning.
 
 ## Projektfaser
 
