@@ -1,0 +1,43 @@
+[
+  {
+    "id": "provider-vvs-001",
+    "name": "Demo VVS Göteborg AB",
+    "trade": "vvs",
+    "serviceAreas": ["Göteborg", "Västra Frölunda"],
+    "capabilities": ["badrum", "golvbrunn", "vatten", "avlopp"],
+    "availability": {"earliestStart": "2026-10-01", "capacity": "medium"},
+    "verifications": [
+      {"type": "company_status", "status": "verified", "source": "demo-registry", "checkedAt": "2026-08-31T00:00:00+02:00"},
+      {"type": "trade_credential", "status": "verified", "source": "demo-industry-registry", "checkedAt": "2026-08-31T00:00:00+02:00"}
+    ],
+    "history": {"verifiedJobs": 34, "verifiedReferences": 28, "invoiceEvidenceCount": 31},
+    "agent": {"channel": "e164", "address": "+46000000001", "mode": "demo"}
+  },
+  {
+    "id": "provider-el-001",
+    "name": "Demo Elinstallation Väst AB",
+    "trade": "electrician",
+    "serviceAreas": ["Göteborg"],
+    "capabilities": ["badrum", "belysning", "golvvarme", "uttag"],
+    "availability": {"earliestStart": "2026-09-20", "capacity": "low"},
+    "verifications": [
+      {"type": "company_status", "status": "verified", "source": "demo-registry", "checkedAt": "2026-08-31T00:00:00+02:00"},
+      {"type": "electrical_registration", "status": "verified", "source": "demo-authority-registry", "checkedAt": "2026-08-31T00:00:00+02:00"}
+    ],
+    "history": {"verifiedJobs": 57, "verifiedReferences": 49, "invoiceEvidenceCount": 52},
+    "agent": {"channel": "e164", "address": "+46000000002", "mode": "demo"}
+  },
+  {
+    "id": "provider-tile-001",
+    "name": "Demo Plattsättning AB",
+    "trade": "tiler",
+    "serviceAreas": ["Göteborg", "Mölndal"],
+    "capabilities": ["tatskikt", "kakel", "klinker", "fall"],
+    "availability": {"earliestStart": "2026-10-15", "capacity": "high"},
+    "verifications": [
+      {"type": "company_status", "status": "verified", "source": "demo-registry", "checkedAt": "2026-08-31T00:00:00+02:00"}
+    ],
+    "history": {"verifiedJobs": 21, "verifiedReferences": 18, "invoiceEvidenceCount": 19},
+    "agent": {"channel": "e164", "address": "+46000000003", "mode": "demo"}
+  }
+]
